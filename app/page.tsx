@@ -2,9 +2,11 @@ import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Services from "./components/Services";
 import Phones from "./components/Phones";
-import Switch from "./components/Switch";
+import Repairs from "./components/Repairs";
+import Community from "./components/Community";
 import Visit from "./components/Visit";
 import Footer from "./components/Footer";
+import CallPill from "./components/CallPill";
 
 export default function Home() {
   return (
@@ -13,9 +15,11 @@ export default function Home() {
       <Hero />
       <Services />
       <Phones />
-      <Switch />
+      <Repairs />
+      <Community />
       <Visit />
       <Footer />
+      <CallPill />
     </main>
   );
 }

@@ -7,7 +7,7 @@ import { SITE } from "../lib/site";
 const LINKS = [
   { label: "What we do", href: "#services" },
   { label: "Phones", href: "#phones" },
-  { label: "Switch", href: "#switch" },
+  { label: "Repairs", href: "#repairs" },
   { label: "Visit", href: "#visit" },
 ];
 
@@ -27,14 +27,14 @@ export default function Nav() {
       <header
         className="fixed top-0 inset-x-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled ? "rgba(243,241,233,0.82)" : "transparent",
-          backdropFilter: scrolled ? "saturate(140%) blur(12px)" : "none",
-          borderBottom: scrolled ? "1px solid var(--line)" : "1px solid transparent",
+          background: scrolled ? "rgba(13,15,18,0.78)" : "transparent",
+          backdropFilter: scrolled ? "saturate(140%) blur(14px)" : "none",
+          borderBottom: scrolled ? "1px solid var(--line-d)" : "1px solid transparent",
         }}
       >
         <div className="mx-auto max-w-[1280px] px-5 sm:px-8 h-[68px] flex items-center justify-between">
           <a href="#top" aria-label="Phone Booth home">
-            <Wordmark />
+            <Wordmark onDark />
           </a>
 
           <nav className="hidden md:flex items-center gap-9">
@@ -42,7 +42,7 @@ export default function Nav() {
               <a
                 key={l.href}
                 href={l.href}
-                className="text-[0.92rem] font-medium text-[var(--ink-soft)] hover:text-[var(--green-d)] transition-colors"
+                className="text-[0.92rem] font-medium text-[var(--muted-d)] hover:text-white transition-colors"
               >
                 {l.label}
               </a>
@@ -50,32 +50,36 @@ export default function Nav() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <a href={SITE.phoneHref} className="btn-green">
+            <a href={SITE.phoneHref} className="btn-blue">
               <PhoneGlyph /> {SITE.phone}
             </a>
           </div>
 
           {/* mobile */}
           <div className="flex md:hidden items-center gap-2">
-            <a href={SITE.phoneHref} aria-label="Call Phone Booth" className="btn-green !p-0 w-[46px] h-[46px] justify-center">
+            <a
+              href={SITE.phoneHref}
+              aria-label={`Call Phone Booth at ${SITE.phone}`}
+              className="btn-blue !p-0 w-[46px] h-[46px] justify-center !rounded-full"
+            >
               <PhoneGlyph />
             </a>
             <button
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
-              className="w-[46px] h-[46px] rounded-full border border-[var(--line)] flex items-center justify-center bg-[var(--cream)]"
+              className="w-[46px] h-[46px] rounded-full border border-[var(--line-d)] flex items-center justify-center bg-white/5"
             >
               <span className="relative block w-[18px] h-[12px]">
                 <span
-                  className="absolute left-0 w-full h-[1.6px] bg-[var(--ink)] transition-all"
+                  className="absolute left-0 w-full h-[1.6px] bg-white transition-all"
                   style={{ top: open ? 5 : 0, transform: open ? "rotate(45deg)" : "none" }}
                 />
                 <span
-                  className="absolute left-0 top-[5px] w-full h-[1.6px] bg-[var(--ink)] transition-all"
+                  className="absolute left-0 top-[5px] w-full h-[1.6px] bg-white transition-all"
                   style={{ opacity: open ? 0 : 1 }}
                 />
                 <span
-                  className="absolute left-0 w-full h-[1.6px] bg-[var(--ink)] transition-all"
+                  className="absolute left-0 w-full h-[1.6px] bg-white transition-all"
                   style={{ bottom: open ? 5 : 0, transform: open ? "rotate(-45deg)" : "none" }}
                 />
               </span>
@@ -87,17 +91,11 @@ export default function Nav() {
       {/* mobile drawer */}
       <div
         className="fixed inset-0 z-40 md:hidden transition-all duration-300"
-        style={{
-          pointerEvents: open ? "auto" : "none",
-          opacity: open ? 1 : 0,
-        }}
+        style={{ pointerEvents: open ? "auto" : "none", opacity: open ? 1 : 0 }}
       >
+        <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
         <div
-          className="absolute inset-0 bg-[var(--ink)]/30"
-          onClick={() => setOpen(false)}
-        />
-        <div
-          className="absolute top-[68px] inset-x-3 rounded-2xl border border-[var(--line)] bg-[var(--cream)] p-3 shadow-[0_30px_60px_-30px_rgba(21,33,28,0.5)] transition-transform duration-300"
+          className="absolute top-[68px] inset-x-3 rounded-2xl border border-[var(--line-d)] bg-[var(--bg-2)] p-3 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.7)] transition-transform duration-300"
           style={{ transform: open ? "translateY(0)" : "translateY(-12px)" }}
         >
           {LINKS.map((l) => (
@@ -105,11 +103,18 @@ export default function Nav() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block px-4 py-3.5 text-[1.05rem] font-medium border-b border-[var(--line)] last:border-0"
+              className="block px-4 py-3.5 text-[1.05rem] font-medium text-[var(--on-dark)] border-b border-[var(--line-d)] last:border-0"
             >
               {l.label}
             </a>
           ))}
+          <a
+            href={SITE.phoneHref}
+            onClick={() => setOpen(false)}
+            className="btn-blue w-full justify-center mt-2"
+          >
+            <PhoneGlyph /> Call the shop
+          </a>
         </div>
       </div>
     </>

@@ -1,7 +1,8 @@
 // Verified facts only (Google Places + search aggregation). No invented prices.
+// PIN = 676701 (last 6 digits of the real phone), handled by bookkeeping, not rendered.
 export const SITE = {
   name: "Phone Booth",
-  tagline: "A calmer way to get connected.",
+  tagline: "Get connected on Main Street.",
   phone: "(973) 676-0701",
   phoneHref: "tel:+19736760701",
   address: "325 Main St",

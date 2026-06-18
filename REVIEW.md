@@ -34,5 +34,25 @@ discarded plant theme. No grafting from B.
   owner-exact, linked. No others.
 - Any customer-review photos? NO. All Pexels CC0, flagged for swap to the shop's real photos before LIVE.
 
-## BY-HAND GATE CHECKLIST (filled after build + browser verify, tagged check: manual)
-(see bottom; updated post-verification)
+## BY-HAND GATE CHECKLIST (check: manual, verified in real browser at 1280px + 375px)
+- P1 dashes: PASS. Zero em/en dashes in src and rendered text (grep + DOM scan = 0).
+- P2/P3 hotlink/scaffold: PASS. All imagery local in public/img; no next.svg/vercel.svg; no geist; no Ticker/Marquee names.
+- P4 dead deps: PASS. Removed unused gsap + motion; lenis is the only runtime dep and is imported. Rebuilt clean (exit 0).
+- P5 placeholder: PASS. No TODO/lorem/PLACEHOLDER.
+- P6 facts/time: PASS. Facts in lib/site.ts; no rendered $ figures; all times 12-hour AM/PM (hours rows, status pill, footer).
+- P7 375px: PASS. scrollWidth 375, no horizontal overflow; decorative glow is pointer-events-none and clipped.
+- P8 reduced motion: PASS. H1 + primary CTA visible with no JS/scroll; SignalSweep renders fully-connected static under reduced motion (never blank).
+- P10 reveal safety: PASS. Reveals visible-by-default; armed only by inline script; reveal-done clears them.
+- P11 imagery: PASS. 11 Pexels CC0 images logged to used_images.json; people are Black/Caribbean community-true; no repeats; no plant imagery; flagged for swap to shop's real photos before LIVE.
+- P15 copy gates: PASS. No generic CTA strings; trade verbs only ("Call the shop", "Get directions", "Bring it by"); no autoplay audio.
+- P16 reference: PASS. REFERENCE.md cites 4 external real device-retail sites (nothing.tech, bang-olufsen.com, backmarket.com, teenage.engineering); zero builds/ references.
+- 404: PASS. /zzz renders "Lost the signal" in the dark frame, not the default Next text.
+- OG/favicon: PASS. public/og.png 1200x630 (frame artifact: signal cells mid-action + wordmark + name legible); app/icon.svg = signal-bars mark, dark.
+- Production build: PASS (exit 0, TypeScript clean, all routes static).
+
+## REVIEWER FINDINGS + FIXES
+- FIX: dev server served stale globals tokens after the rewrite (cream still showing). Cleared .next and restarted; new dark/blue tokens confirmed in served CSS.
+- FIX: gsap + motion were dead deps inherited by the scaffold. Removed; rebuilt clean.
+- NOTE: signature rAF could not be exercised in the headless preview (tab backgrounded throttles requestAnimationFrame); interaction logic + listeners verified present, idle/reactive paths sound, reduced-motion static fallback confirmed. To be hand-tested on the demo iPhone at the localhost STOP (proof/iphone-stop.mov), per §S4 item 2, before INVOICE.
+- The plant/botanical theme and the "signal bloom" interaction are FULLY removed (grep = 0 for monstera/botanical/Zodiak/SignalBloom across src).
+- Skeptical-owner / art-director / editor judgments folded in (single-agent session, witness: human at STOP): sections read as a device shop, not a generic agency block; world sentence kept in all four registers; headline passes ownership test.

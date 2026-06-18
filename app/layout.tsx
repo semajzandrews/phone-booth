@@ -4,14 +4,15 @@ import SmoothScroll from "./components/SmoothScroll";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://phone-booth.vercel.app"),
-  title: "Phone Booth · A calmer way to get connected · Main St, Orange NJ",
+  title: "Phone Booth · Phones, plans and repairs on Main St, Orange NJ",
   description:
-    "Phone Booth on Main Street in Orange, NJ. Prepaid plans, new phones from Apple, Samsung and Motorola, activations, upgrades, bill pay, bring your own device, and accessories. A calmer neighborhood phone shop.",
+    "Phone Booth on Main Street in Orange, NJ. New phones, prepaid plans, activations, bring your own device and fast phone repairs while you wait.",
   openGraph: {
     title: "Phone Booth · Orange NJ",
     description:
-      "A calmer way to get connected. Phones, plans, activations and accessories on Main Street.",
+      "Get connected on Main Street. New phones, real plans and fast fixes, set up while you wait.",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630 }],
   },
   icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }] },
 };
@@ -29,11 +30,11 @@ const armScript = `
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: armScript }} />
       </head>
-      <body className="grain">
+      <body>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
