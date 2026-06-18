@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ============================ FONTS (self-hosted Fontshare) ============================ */
+@font-face {
+  font-family: "Zodiak";
+  src: url("/fonts/zodiak-var.woff2") format("woff2");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Zodiak";
+  src: url("/fonts/zodiak-var-italic.woff2") format("woff2");
+  font-weight: 100 900; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "General Sans"; src: url("/fonts/general-sans-400.woff2") format("woff2");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "General Sans"; src: url("/fonts/general-sans-500.woff2") format("woff2");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "General Sans"; src: url("/fonts/general-sans-600.woff2") format("woff2");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "General Sans"; src: url("/fonts/general-sans-700.woff2") format("woff2");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* ============================ TOKENS ============================ */
+:root {
+  --paper:    #f3f1e9;   /* warm off-white botanical ground */
+  --paper-2:  #ece9de;   /* slightly deeper panel */
+  --ink:      #15211c;   /* deep forest ink (near-black, green-cast) */
+  --ink-soft: #3a4a42;
+  --muted:    #6c776f;
+  --line:     #d7d3c4;
+  --green:    #0e8f6e;   /* LANE ACCENT */
+  --green-d:  #0a6f55;
+  --green-l:  #29a888;
+  --green-wash: rgba(14, 143, 110, 0.10);
+  --green-glow: rgba(14, 143, 110, 0.06);
+  --cream:    #faf8f1;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-green: var(--green);
+  --font-display: "Zodiak", Georgia, serif;
+  --font-body: "General Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+* { -webkit-tap-highlight-color: transparent; }
+html, body { overflow-x: clip; }
+
+html { scroll-behavior: auto; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+
+@layer base {
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; line-height: 1.02; letter-spacing: -0.02em; }
+  ::selection { background: var(--green); color: #fff; }
+}
+
+/* paper grain */
+.grain::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================ TYPE SCALE ============================ */
+.display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.025em;
+}
+.italic-accent { font-style: italic; font-weight: 500; }
+.kicker {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-d);
+}
+.measure { max-width: 46ch; }
+
+/* ============================ BUTTONS (layered so utilities win) ============================ */
+@layer components {
+  .btn-green {
+    display: inline-flex; align-items: center; gap: 0.55rem;
+    background: var(--green); color: #fff;
+    padding: 0.92rem 1.5rem; border-radius: 999px;
+    font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em;
+    transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 10px 30px -12px rgba(14,143,110,0.55);
+  }
+  .btn-green:hover { background: var(--green-d); transform: translateY(-2px); box-shadow: 0 16px 40px -14px rgba(14,143,110,0.6); }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1px solid var(--line); color: var(--ink);
+    padding: 0.9rem 1.45rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem;
+    transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+    background: transparent;
+  }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green-d); background: var(--green-glow); }
+}
+
+/* ============================ REVEAL (visible-by-default, pure CSS, armed by inline script) ============================ */
+.reveal { opacity: 1; }
+.reveal-armed .reveal {
+  opacity: 0; transform: translateY(22px);
+  animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--d, 0s);
+}
+@keyframes rise { to { opacity: 1; transform: none; } }
+.reveal-done .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+
+/* ============================ MISC ============================ */
+.hairline { border-top: 1px solid var(--line); }
+.chip {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 0.4rem 0.85rem; font-size: 0.82rem; font-weight: 500; color: var(--ink-soft);
+  background: var(--cream);
+}
+
+/* split-screen sticky image behavior */
+.split-img { will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-armed .reveal { animation: none !important; opacity: 1 !important; transform: none !important; }
+  * { scroll-behavior: auto !important; }
+}
