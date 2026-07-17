@@ -66,7 +66,7 @@ export default function Footer() {
             className="group inline-flex items-center gap-2 text-[0.82rem] text-[var(--muted-d)] hover:text-white transition-colors"
           >
             <span className="w-1.5 h-1.5 rounded-full" style={{ background: "var(--blue)" }} />
-            Built by{" "}
+            built{" "}
             <span className="font-medium text-[var(--on-dark)] group-hover:text-white">bysemaj.com</span>
           </a>
         </div>
